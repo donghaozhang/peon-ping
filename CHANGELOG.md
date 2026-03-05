@@ -3,6 +3,8 @@
 ## v2.13.0 (2026-03-03)
 
 ### Added
+- **Rovo Dev CLI adapter** (`adapters/rovodev.sh`) — translates Rovo Dev event hooks (`on_complete`, `on_error`, `on_tool_permission`) into CESP categories for peon-ping sound playback. Argument-based (not stdin), matching Rovo Dev's shell command hook model.
+- **Rovo Dev CLI auto-registration** — `install.sh` detects `~/.rovodev/config.yml` and automatically appends `eventHooks` configuration, so `peon-ping-setup` just works for Rovo Dev users.
 - **`/peon-ping-rename` skill** — give the current Claude Code session a custom name shown in desktop notification titles and terminal tab title. Zero tokens consumed (intercepted by `UserPromptSubmit` hook). Names stored in `.state.json` keyed by session ID — multiple tabs in the same repo each get independent names. `/peon-ping-rename` with no argument resets to auto-detect.
 - **`CLAUDE_SESSION_NAME` env var** — set before launching `claude` to give a session a fixed name at the environment level. Shows in both notification titles and terminal tab titles.
 - **`notification_title_script` config key** — shell command run at event time to compute the project name dynamically. Receives `PEON_SESSION_ID`, `PEON_CWD`, `PEON_HOOK_EVENT`, `PEON_SESSION_NAME` env vars; stdout used as project name (max 50 chars).
@@ -36,12 +38,6 @@
 ### Fixed
 - Fix Ghostty terminal detection when running inside tmux: `_mac_terminal_bundle_id()` now falls back to env vars (`GHOSTTY_RESOURCES_DIR`, `ITERM_SESSION_ID`, `WARP_IS_LOCAL_SHELL_SESSION`) when `TERM_PROGRAM` is overwritten by tmux/screen (#269)
 - Fix case-sensitive Ghostty process name in `terminal_is_focused()`: add lowercase `ghostty` match alongside `Ghostty` (#269)
-
-## v2.13.0 (2026-03-03)
-
-### Added
-- **Rovo Dev CLI adapter** (`adapters/rovodev.sh`) — translates Rovo Dev event hooks (`on_complete`, `on_error`, `on_tool_permission`) into CESP categories for peon-ping sound playback. Argument-based (not stdin), matching Rovo Dev's shell command hook model.
-- **Rovo Dev CLI auto-registration** — `install.sh` detects `~/.rovodev/config.yml` and automatically appends `eventHooks` configuration, so `peon-ping-setup` just works for Rovo Dev users.
 
 ## v2.10.0 (2026-02-23)
 
